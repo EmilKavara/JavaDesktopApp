@@ -1,0 +1,85 @@
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+
+public class Executor {
+    JFrame frame = new JFrame();
+    JPanel panel = new JPanel();
+    JButton btn1 = new JButton("Login");
+    JButton btn2 = new JButton("Close");
+    JTextField textField=new JTextField();
+    JTextArea textArea=new JTextArea();
+    JLabel labelUsername=new JLabel("Username:");
+    JLabel labelPassword=new JLabel("Password:");
+    JLabel label=new JLabel();
+    public Executor() {
+        panel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(5, 5, 5, 5);
+
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        panel.add(btn1, gbc);
+
+        gbc.gridx = 2;
+        gbc.gridy = 3;
+        panel.add(btn2, gbc);
+
+        gbc.gridwidth = 2;
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        panel.add(textArea, gbc);
+
+        gbc.gridwidth = 2;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panel.add(labelUsername, gbc);
+
+        gbc.gridwidth = 2;
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        panel.add(textField, gbc);
+
+        gbc.gridwidth = 2;
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        panel.add(labelPassword, gbc);
+
+        gbc.gridwidth = 3;
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        panel.add(label, gbc);
+
+        frame.add(panel);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(500,300);
+        frame.setVisible(true);
+        frame.setTitle("Login form");
+
+        btn1.addActionListener(e -> {
+            String username=textArea.getText();
+            String password=textField.getText();
+            if(!(username.isEmpty()) && !(password.isEmpty())) {
+                label.setText("Welcome " + username + ", your password is " + password);
+            }else{
+                label.setText("Enter username and password");
+            }
+        });
+        btn2.addActionListener(e -> frame.dispose());
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new Executor();
+            }
+        });
+    }
+
+}
