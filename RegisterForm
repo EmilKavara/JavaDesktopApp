@@ -1,0 +1,133 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class Register {
+    JFrame frame = new JFrame();
+    JPanel panel = new JPanel();
+    JButton btn1 = new JButton("Register");
+    JButton btn2 = new JButton("Close");
+    JTextField textField=new JTextField();
+    JTextField emailTextField=new JTextField();
+    JTextField numberTextFeild=new JTextField();
+    JRadioButton genderRadioButton=new JRadioButton("Female");
+    JRadioButton gender2RadioButton=new JRadioButton("Male");
+    JTextArea textArea=new JTextArea();
+    JLabel labelUsername=new JLabel("Username:");
+    JLabel labelPassword=new JLabel("Password:");
+    JLabel labelEmail=new JLabel("E-mail:");
+    JLabel labelNumber=new JLabel("Number:");
+    JLabel labelGender=new JLabel("Gender:");
+    JLabel label=new JLabel();
+    ButtonGroup buttonGroup=new ButtonGroup();
+    public Register() {
+        panel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(11, 11, 11, 11);
+
+        gbc.gridx = 0;
+        gbc.gridy = 10;
+        panel.add(btn1, gbc);
+
+        gbc.gridx = 2;
+        gbc.gridy = 10;
+        panel.add(btn2, gbc);
+
+        gbc.gridwidth = 2;
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        panel.add(textArea, gbc);
+
+        gbc.gridwidth = 2;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panel.add(labelUsername, gbc);
+
+        gbc.gridwidth = 3;
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        panel.add(emailTextField, gbc);
+
+        gbc.gridwidth = 2;
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        panel.add(labelEmail, gbc);
+
+        gbc.gridwidth = 2;
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        panel.add(numberTextFeild, gbc);
+
+        gbc.gridwidth = 3;
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        panel.add(labelNumber, gbc);
+
+
+        gbc.gridwidth = 2;
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        panel.add(textField, gbc);
+
+        gbc.gridwidth = 2;
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        panel.add(labelPassword, gbc);
+
+        gbc.gridwidth = 3;
+        gbc.gridx = 0;
+        gbc.gridy = 11;
+        panel.add(label, gbc);
+
+        gbc.gridwidth = 3;
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        panel.add(labelGender, gbc);
+
+        gbc.gridwidth = 2;
+        gbc.gridx = 0;
+        gbc.gridy = 7;
+        buttonGroup.add(genderRadioButton);
+        panel.add(genderRadioButton, gbc);
+
+        gbc.gridwidth = 2;
+        gbc.gridx = 2;
+        gbc.gridy = 7;
+        gender2RadioButton.setVisible(true);
+        buttonGroup.add(gender2RadioButton);
+        panel.add(gender2RadioButton, gbc);
+
+        frame.add(panel);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(700,500);
+        frame.setVisible(true);
+        frame.setTitle("Register form");
+
+        btn1.addActionListener(e -> {
+            String username=textArea.getText();
+            String password=textField.getText();
+            String email=emailTextField.getText();
+            String number=numberTextFeild.getText();
+            StringBuilder sb=new StringBuilder();
+            sb.append("Username : "+username+", password: "+password+", email: "+email+", number: "+number);
+            if(!(username.isEmpty()) && !(password.isEmpty()) && !(email.isEmpty())&& !(number.isEmpty())) {
+                if(genderRadioButton.isSelected()) {
+                    sb.append(", gender female.");
+
+
+                }else if(gender2RadioButton.isSelected()){
+                    sb.append(", gender male.");
+                }
+                label.setText(sb.toString());
+            }else{
+                label.setText("Enter username and password");
+            }
+        });
+        btn2.addActionListener(e -> frame.dispose());
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(Register::new);
+    }
+
+}
